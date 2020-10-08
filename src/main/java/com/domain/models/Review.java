@@ -1,18 +1,24 @@
 package com.domain.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "review_id")
     private Long review_id;
 
     private String text, title;
+
+    public Review() {
+    }
+
+    public Review(String text, String title) {
+        this.text = text;
+        this.title = title;
+    }
 
     public Long getReview_id() {
         return review_id;
