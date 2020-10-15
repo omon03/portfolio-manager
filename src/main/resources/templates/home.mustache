@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Getting Started: Serving Web Content</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
+<head>
+    <title> {{title}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
 
     <body>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -14,6 +15,10 @@
                 <a class="p-2 text-dark" href="#">Pricing</a>
             </nav>
             <a class="btn btn-outline-primary" href="#">Sign up</a>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}">  <!-- использовать во всех формах -->
+                <input type="submit" class="btn btn-danger" value="Sign Out"/>
+            </form>
         </div>
     </body>
 

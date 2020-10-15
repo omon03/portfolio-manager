@@ -21,6 +21,7 @@ public class MainController {
 
     @GetMapping("/")  // страница
     public String home(Map<String, Object> model) {
+        model.put("title", "home page");
         model.put("name", "World");
         return "home";  // шаблон
     }
