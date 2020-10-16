@@ -9,14 +9,15 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id;  // обязательное поле
 
-    private String username, password, email;
+    private String username, password, email;  // обязательное поле: username, password
+    private boolean enabled;  // обязательное поле
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private Set<Role> roles;  // обязательное поле
 
     public Long getId() {
         return id;
@@ -40,6 +41,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {

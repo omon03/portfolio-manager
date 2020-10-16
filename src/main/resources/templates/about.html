@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${title}"></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body>
+        <header th:insert="blocks/headerVisitor :: headerVisitor"></header>  <!-- insert - вставка блока кода -->
+
+        <h1 class="text-white ml-3" th:text="${title}"></h1><br>
+
+        <div th:replace="blocks/footer :: footer"></div>  <!-- replace - замена всей строки на блок кода -->
+    </body>
+
+</html>

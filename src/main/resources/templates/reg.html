@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <header th:insert="blocks/headerVisitor :: headerVisitor"></header>  <!-- insert - вставка блока кода -->
+
+    <h1 class="text-white ml-3" th:text="${title}"></h1><br>
+
+    <div class="container">
+        <h1>Registration</h1>
+        <form action="/reg" method="post">
+            <input type="text" name="username" class="form-control" placeholder="Username"><br>
+            <input type="email" name="email" class="form-control" placeholder="Email"><br>
+            <input type="password" name="password" class="form-control" placeholder="Password"><br>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">  <!-- использовать во всех формах -->
+            <input type="submit" value="Register now" class="btn btn-success">
+        </form>
+    </div><br>
+
+    <div th:replace="blocks/footer :: footer"></div>  <!-- replace - замена всей строки на блок кода -->
+
+</body>
+
+</html>

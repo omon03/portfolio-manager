@@ -1,7 +1,6 @@
 package com.domain.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.proxy.NoOp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/about", "/reviews", "/css/**").permitAll()  // страницы доступные всем пользователям
+                    .antMatchers("/", "/home", "/about", "/reviews", "/css/**", "/reg").permitAll()  // страницы доступные всем пользователям
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -38,9 +37,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll();
     }
 
+/*! тестовая функция авторизации
     @Bean
     @Override
-    public UserDetailsService userDetailsService() {  // тестовая функция авторизации
+    public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
                         .username("user")
@@ -50,13 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new InMemoryUserDetailsManager(user);
     }
+*/
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select username, password, email from users where username=?")
-                .authoritiesByUsernameQuery("select u.username, ur.roles from users u inner join user_role ur on u.id = ur.user_id where u.username=?")
+                .passwordEncoder(NoOpPasswordEncoder.getInstance())  // отключено шифрование пароля!!!
+                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+                .authoritiesByUsernameQuery("select u.username, ur.roles from users u inner join user_role ur on u.id = ur.user_id where u.username=?");
     }
 }
